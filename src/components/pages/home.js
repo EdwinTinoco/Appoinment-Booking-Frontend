@@ -29,6 +29,8 @@ export default class Home extends Component {
                   </div>
                </Link>
             </div>
+
+
          </div>
       )
    }

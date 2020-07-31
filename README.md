@@ -1,5 +1,11 @@
-# React/Redux/Router Starter Project
+### Appoinment Booking App
 
-> Provided for the students of the [Bottega Code School](https://bottega.tech/)
+#### Techologies used:
+   #### - React JS
+   #### - DOM
+   #### - Router
+   #### - Redux
+   #### - Axios
 
-*Fork from [es6-webpack2-starter](https://github.com/micooz/es6-webpack2-starter)*
+
+#### Powered by @Edwin Tinoco

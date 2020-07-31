@@ -1,0 +1,32 @@
+.contact-main-wrapper{
+   .title{
+      background-color: #797878;
+      padding: 30px 0px;
+      text-align: center;
+      box-shadow: 0px 15px 20px rgba(0, 0, 0, 0.3);
+
+      h1{
+         color: #FFBE0B;
+      }
+   }
+
+   .image-info{
+      width: 100vw;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      height: calc(100vh - 84px);   
+      
+      .info{
+         display: flex;
+         justify-content: center;
+         align-items: center;
+         flex-direction: column;
+         padding: 100px;
+
+         p{
+            font-size: 1.3em;
+            font-family: 'Open Sans', sans-serif;
+         }
+      }
+   }
+}
