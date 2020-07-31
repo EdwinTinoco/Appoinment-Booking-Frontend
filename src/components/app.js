@@ -6,28 +6,34 @@ import {
   Redirect
 } from 'react-router-dom';
 
+import Icons from "../helpers/icons";
+
 import NavigationBar from "./navigation-bar/navigation-bar"
 import Home from "./pages/home"
 import Services from "./pages/services"
+import About from "./pages/about"
+import Contact from "./pages/contact"
 
-export default class App extends Component {
-  render() {
-    return (
-      <div className="container">
-        <Router>
+export default function App(props) {
+  Icons();
 
-          <div>
-            <NavigationBar />
+  return (
+    <div className="container">
+      <Router>
 
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route path="/services" component={Services} />
-            </Switch>
+        <div>
+          <NavigationBar />
 
-          </div>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/services" component={Services} />
+            <Route path="/about" component={About} />
+            <Route path="/contact" component={Contact} />
+          </Switch>
 
-        </Router>
-      </div>
-    );
-  }
+        </div>
+
+      </Router>
+    </div>
+  );
 }

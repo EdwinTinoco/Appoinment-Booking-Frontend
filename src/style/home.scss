@@ -22,10 +22,12 @@
          background-color: rgba(0,0,0,0.5);
       }
    
-      .title{         
+      .title{     
+         padding-bottom: 35px;
+
          p{
-            font-size: 1.5em;
-            font-weight: 800;
+            font-size: 1.8em;
+            font-weight: 500;
             color: #FFBE0B; 
             position: relative;         
          }
@@ -33,9 +35,10 @@
 
       .info{
          text-align: center;
-         padding-bottom: 25px;
+         padding-bottom: 65px;
          
          p{
+            font-family: 'Open Sans', sans-serif;
             font-size: 1.2em;
             color: #fff;
             width: 880px;
@@ -59,7 +62,7 @@
    
             p{
                font-size: 1.3em;
-               font-weight: 800;
+               font-weight: 500;
                color: black;
             }
    
