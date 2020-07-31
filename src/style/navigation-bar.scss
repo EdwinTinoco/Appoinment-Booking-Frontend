@@ -1,38 +1,63 @@
-.navbar-main-wrapper{
-   background-color: $space-cadet;
-   display: flex;
-   justify-content: space-between;
-   align-items: center;
+.navbar-main-wrapper{  
+   .contact-info{
+      background-color: #272626;
+      height: 40px;
+      text-align: center;
 
-   .left-column{
-      color: $cholcate-web;
-      font-size: 1.5em;
-   }
-
-   .center-column{
-      .links-wrapper{
-         display: flex;
-         justify-content: space-between;
-
-         .link{
-            margin-right: 20px;
-
-            a{
-               text-decoration: none;
-               color: $cholcate-web;
-               font-size: 1.5em;
-               transition: 0.3s ease-in-out;
-
-               &:hover{
-                  color: $apricot;
-               }
-            }
-         }
+      p{
+         color: #fff;
       }
    }
 
-   .right-column{
-      color: $cholcate-web;
-      font-size: 1.5em;
+   .navbar-info{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      .left-column{
+         margin-left: 50px;
+
+         img{
+            width: 218px;
+            height: 65px;
+         }
+      }   
+   
+      .right-column{
+         display: flex;
+         justify-content: space-between;
+         align-items: center;
+   
+         .links-wrapper{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-right: 100px;
+   
+            .link{
+               margin-right: 20px;
+   
+               a{
+                  text-decoration: none;
+                  color: black;
+                  font-size: 1.2em;
+                  font-weight: 800;
+                  transition: 0.3s ease-in-out;
+   
+                  &:hover{
+                     color: #FFBE0B;
+                  }
+               }
+            }
+         }
+   
+         .login-signup-wrapper{
+            margin-right: 20px;
+            font-size: 1.2em;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+         }         
+      }
    }
 }
