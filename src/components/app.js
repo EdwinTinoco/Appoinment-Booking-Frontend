@@ -13,6 +13,7 @@ import Home from "./pages/home"
 import Services from "./pages/services"
 import About from "./pages/about"
 import Contact from "./pages/contact"
+import Footer from "./footer/footer"
 
 export default function App(props) {
   Icons();
@@ -32,6 +33,8 @@ export default function App(props) {
           </Switch>
 
         </div>
+
+        <Footer />
 
       </Router>
     </div>
