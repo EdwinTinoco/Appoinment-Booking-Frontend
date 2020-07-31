@@ -1,0 +1,38 @@
+.navbar-main-wrapper{
+   background-color: $space-cadet;
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+
+   .left-column{
+      color: $cholcate-web;
+      font-size: 1.5em;
+   }
+
+   .center-column{
+      .links-wrapper{
+         display: flex;
+         justify-content: space-between;
+
+         .link{
+            margin-right: 20px;
+
+            a{
+               text-decoration: none;
+               color: $cholcate-web;
+               font-size: 1.5em;
+               transition: 0.3s ease-in-out;
+
+               &:hover{
+                  color: $apricot;
+               }
+            }
+         }
+      }
+   }
+
+   .right-column{
+      color: $cholcate-web;
+      font-size: 1.5em;
+   }
+}
