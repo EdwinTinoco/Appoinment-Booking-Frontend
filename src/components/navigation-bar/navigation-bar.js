@@ -25,7 +25,7 @@ const NavigationBar = () => {
                </div>
 
                <div className="phone">
-                  <p>O agendala online a traves de nuestro sitio web.</p>
+                  <p>Tambien puedes agendarla online a traves de nuestro sitio web.</p>
                </div>
             </div>
          </div>
@@ -51,6 +51,10 @@ const NavigationBar = () => {
 
                   <div className="link">
                      <Link to="/contact">Contact</Link>
+                  </div>
+
+                  <div className="link">
+                     <Link to="/manager">Manager</Link>
                   </div>
                </div>
 

@@ -96,8 +96,7 @@ export default function Register(props) {
                   onChange={({ target }) => { setUserPhoneNumber(target.value) }}
                   className='new-entry-input'
                   name="phone"
-                  placeholder='Phone number'
-                  required
+                  placeholder='Phone number (optional)'
                >
                </input>
 

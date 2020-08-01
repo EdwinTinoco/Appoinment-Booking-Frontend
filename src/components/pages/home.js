@@ -49,7 +49,7 @@ export default class Home extends Component {
 
                   <div className="column">
                      <FontAwesomeIcon className="icon" icon="globe-americas" />
-                     <p className="title">Buen trato</p>
+                     <p className="title">Excelente trato</p>
 
                      <p className="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
                   </div>
