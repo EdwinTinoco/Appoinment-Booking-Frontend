@@ -25,7 +25,7 @@ export default class Home extends Component {
 
                <Link to="/auth">
                   <div className="button">
-                     <p>Agenda tu cita</p>
+                     <p>Agenda tu cita online</p>
                   </div>
                </Link>
             </div>

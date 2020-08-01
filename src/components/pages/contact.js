@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Image3 from "../../../static/assets/images/images/image-3.jpg"
+import Image3 from "../../../static/assets/images/images/image-5.jpg"
 
 export default class Contact extends Component {
    constructor(props) {
