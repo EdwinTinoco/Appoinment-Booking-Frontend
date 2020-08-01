@@ -15,7 +15,7 @@ const NavigationBar = () => {
                </div>
 
                <div className="phone">
-                  <p>Llamanos para agendar tu cita al (801) 123 4567</p>
+                  <p>Llamanos para agendar tu cita al (801) 374-3045</p>
                </div>
             </div>
 

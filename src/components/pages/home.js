@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default class Home extends Component {
    constructor(props) {
@@ -30,7 +31,42 @@ export default class Home extends Component {
                </Link>
             </div>
 
+            <div className="featured-section">
+               <div className="columns-wrapper">
+                  <div className="column">
+                     <FontAwesomeIcon className="icon" icon="globe-americas" />
+                     <p className="title">Servicio</p>
 
+                     <p className="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                  </div>
+
+                  <div className="column">
+                     <FontAwesomeIcon className="icon" icon="globe-americas" />
+                     <p className="title">Calidad</p>
+
+                     <p className="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                  </div>
+
+                  <div className="column">
+                     <FontAwesomeIcon className="icon" icon="globe-americas" />
+                     <p className="title">Buen trato</p>
+
+                     <p className="description">Lorem ipsum dolor, sit amet consectetur adipisicing elit.</p>
+                  </div>
+               </div>
+
+            </div>
+
+            <div className="services-link">
+               <Link to="/services">
+                  <div className="button">
+                     <div className="icon">
+                        <FontAwesomeIcon icon="calculator" />
+                     </div>
+                  Que tramite o servicio necesitas?
+               </div>
+               </Link>
+            </div>
          </div>
       )
    }

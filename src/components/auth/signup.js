@@ -10,6 +10,7 @@ export default function Register(props) {
    const [userPhoneNumber, setUserPhoneNumber] = useState('')
    const [userEmail, setUserEmail] = useState('')
    const [userPassword, setUserPassword] = useState("")
+   const [userConfirmPassword, setUserConfirmPassword] = useState("")
    const [messageUser, setMessageUser] = useState("")
 
    const handleSubmitRegisterNewUser = () => {
@@ -67,47 +68,68 @@ export default function Register(props) {
             <p>Sign up</p>
 
             <form onSubmit={handleSubmitRegisterNewUser} className="signup-form">
+               <label htmlFor="first-name"><b>First Name</b></label>
                <input type='text'
                   value={userFirstName}
                   onChange={({ target }) => { setUserFirstName(target.value) }}
                   className='new-entry-input'
+                  name="first-name"
                   placeholder='First Name'
                   required
                >
                </input>
 
+               <label htmlFor="last-name"><b>last Name</b></label>
                <input type='text'
                   value={userLastName}
                   onChange={({ target }) => { setUserLastName(target.value) }}
                   className='new-entry-input'
+                  name="last-name"
                   placeholder='Last Name'
                   required
                >
                </input>
 
+               <label htmlFor="phone"><b>Phone</b></label>
                <input type='text'
-                  className='new-entry-input'
                   value={userPhoneNumber}
                   onChange={({ target }) => { setUserPhoneNumber(target.value) }}
+                  className='new-entry-input'
+                  name="phone"
                   placeholder='Phone number'
                   required
                >
                </input>
 
+               <label htmlFor="email"><b>Email</b></label>
                <input type='email'
-                  className='new-entry-input'
                   value={userEmail}
                   onChange={({ target }) => { setUserEmail(target.value) }}
+                  className='new-entry-input'
+                  name="email"
                   placeholder='Email'
                   required
                >
                </input>
 
+               <label htmlFor="password"><b>Password</b></label>
                <input type='password'
-                  className='new-entry-input'
                   value={userPassword}
                   onChange={({ target }) => { setUserPassword(target.value) }}
+                  className='new-entry-input'
+                  name="password"
                   placeholder='Password'
+                  required
+               >
+               </input>
+
+               <label htmlFor="confirm-password"><b>Confirm Password</b></label>
+               <input type='password'
+                  value={userConfirmPassword}
+                  onChange={({ target }) => { setUserConfirmPassword(target.value) }}
+                  className='new-entry-input'
+                  name="confirm-password"
+                  placeholder='Confirm Password'
                   required
                >
                </input>

@@ -92,16 +92,18 @@
             }
    
             a{
-               text-decoration: none;            
-   
+               text-decoration: none; 
+               
                .sign-up{
                   margin-right: 10px;
                   background-color: #FFBE0B;
                   padding: 1px 10px;
                   border-radius: 5px;
                   transition: 0.3s ease-in-out;
-   
+                  
                   p{
+                     color: black;   
+                     font-family: 'Roboto', sans-serif;        
                      font-size: 1em;
                   }
    
