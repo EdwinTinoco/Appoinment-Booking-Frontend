@@ -1,64 +1,50 @@
-import React, { useState, useContext, useEffect } from "react"
-import { Link } from "react-router-dom";
+import React, { Component } from "react"
 
 import Image7 from '../../../static/assets/images/images/image-7.jpg'
 
 
-export default function Register(props) {
-   const [userFirstName, setUserFirstName] = useState('')
-   const [userLastName, setUserLastName] = useState('')
-   const [userPhoneNumber, setUserPhoneNumber] = useState('')
-   const [userEmail, setUserEmail] = useState('')
-   const [userPassword, setUserPassword] = useState("")
-   const [userConfirmPassword, setUserConfirmPassword] = useState("")
-   const [input, setInput] = useState({
-      name: "",
-      last_name: "",
-      phone: "",
-      email: "",
-      password: "",
-      confirm_password: ""
-   })
-   const [errors, setErrors] = useState({})
+export default class Register extends Component {
+   constructor(props) {
+      super(props);
 
-   const handleChange = (event) => {
-      let inputs = input;
+      this.state = {
+         firstName: "",
+         lastName: "",
+         phone: "",
+         email: "",
+         password: "",
+         confirmPassword: "",
+         errorsMessage: {}
+      }
 
+      this.handleChange = this.handleChange.bind(this)
+      this.handleSubmitRegisterNewUser = this.handleSubmitRegisterNewUser.bind(this)
+   }
 
-      [event.target.name] = event.target.value;
-      console.log('target name', [event.target.name])
-      console.log('target value', event.target.value)
-
-      inputs.first_name = event.target.value,
-
-         console.log("inputs", inputs)
-
-      setInput({
-         inputs
+   handleChange(event) {
+      this.setState({
+         [event.target.name]: event.target.value
       });
    }
 
-   const handleSubmitRegisterNewUser = () => {
+   handleSubmitRegisterNewUser() {
       event.preventDefault();
 
       console.log('validate', validate())
 
-      console.log(input, errors);
+      console.log(this.state.errorsMessage);
 
       if (validate()) {
-         console.log(input, errors);
+         console.log(this.state.errorsMessage);
 
-         let inputs = {};
-         inputs["first_name"] = "";
-         inputs["last_name"] = "";
-         inputs["phone"] = "";
-         inputs["email"] = "";
-         inputs["password"] = "";
-         inputs["confirm_password"] = "";
-
-         setInput({
-            inputs
-         });
+         this.setState({
+            firstName: "",
+            lastName: "",
+            phone: "",
+            email: "",
+            password: "",
+            confirmPassword: "",
+         })
 
       }
 
@@ -101,159 +87,164 @@ export default function Register(props) {
       // }
    }
 
-   const validate = () => {
-      let inputs = input;
+   validate() {
       let errors = {};
       let isValid = true;
 
-      if (!inputs["first_name"]) {
+      console.log('start validate');
+
+
+      if (!this.state.firstName) {
          isValid = false;
-         errors["first_name"] = "Please enter your first name.";
+         errors["firstName"] = "Please enter your first name.";
       }
 
-      if (!inputs["last_name"]) {
+      if (!this.state.LastName) {
          isValid = false;
-         errors["last_name"] = "Please enter your last name.";
+         errors["lastName"] = "Please enter your last name.";
       }
 
-      if (!inputs["phone"]) {
+      if (!this.state.phone) {
          isValid = false;
          errors["phone"] = "Please enter your phone.";
       }
 
-      if (!inputs["email"]) {
+      if (!this.state.email) {
          isValid = false;
          errors["email"] = "Please enter your email.";
       }
 
-      if (typeof inputs["email"] !== "undefined") {
+      if (typeof this.state.email !== "undefined") {
          var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
-         if (!pattern.test(inputs["email"])) {
+         if (!pattern.test(this.state.email)) {
             isValid = false;
             errors["email"] = "Please enter valid email address.";
          }
       }
 
-      if (!inputs["password"]) {
+      if (!this.state.password) {
          isValid = false;
          errors["password"] = "Please enter your password.";
       }
 
-      if (!inputs["confirm_password"]) {
+      if (!this.state.confirmPassword) {
          isValid = false;
-         errors["confirm_password"] = "Please enter your confirm password.";
+         errors["confirmPassword"] = "Please enter your confirm password.";
       }
 
-      if (typeof inputs["password"] !== "undefined" && typeof inputs["confirm_password"] !== "undefined") {
+      if (typeof this.state.password !== "undefined" && typeof this.state.confirmPassword !== "undefined") {
 
-         if (inputs["password"] != inputs["confirm_password"]) {
+         if (this.state.password != this.state.confirmPassword) {
             isValid = false;
             errors["password"] = "Passwords don't match.";
          }
       }
 
-      setErrors({
-         errors
-      });
+      this.setState({
+         errorsMessage: errors
+      })
 
       return isValid;
    }
 
 
-   return (
-      <div className="signup-main-wrapper">
-         <div className="left-column">
-            <div className="logo">
-               <img src={Image7} alt='image-7' />
+
+   render() {
+      return (
+         <div className="signup-main-wrapper">
+            <div className="left-column">
+               <div className="logo">
+                  <img src={Image7} alt='image-7' />
+               </div>
             </div>
+
+            <div className="right-column">
+               <p>Sign up</p>
+
+               <form onSubmit={this.handleSubmitRegisterNewUser} className="signup-form">
+                  <div className="form-group">
+                     <label htmlFor="firstName"><b>First Name</b></label>
+                     <input type='text'
+                        value={this.state.firstName}
+                        onChange={this.handleChange}
+                        className='new-entry-input'
+                        name="firstName"
+                        placeholder='First Name'
+                     >
+                     </input>
+                     <div className="text-danger">{this.state.errorsMessage.firstName}</div>
+                  </div>
+
+                  <div className="form-group">
+                     <label htmlFor="lastName"><b>Last Name</b></label>
+                     <input type='text'
+                        value={this.state.lastName}
+                        onChange={this.handleChange}
+                        className='new-entry-input'
+                        name="lastName"
+                        placeholder='Last Name'
+                     >
+                     </input>
+                     <div className="text-danger">{this.state.errorsMessage.lastName}</div>
+                  </div>
+
+                  <div className="form-group">
+                     <label htmlFor="phone"><b>Phone</b></label>
+                     <input type='text'
+                        value={this.state.phone}
+                        onChange={this.handleChange}
+                        className='new-entry-input'
+                        name="phone"
+                        placeholder='Phone number (optional)'
+                     >
+                     </input>
+                  </div>
+
+                  <div className="form-group">
+                     <label htmlFor="email"><b>Email</b></label>
+                     <input type='email'
+                        value={this.state.email}
+                        onChange={this.handleChange}
+                        className='new-entry-input'
+                        name="email"
+                        placeholder='Email'
+                     >
+                     </input>
+                     <div className="text-danger">{this.state.errorsMessage.email}</div>
+                  </div>
+
+                  <div className="form-group">
+                     <label htmlFor="password"><b>Password</b></label>
+                     <input type='password'
+                        value={this.state.password}
+                        onChange={this.handleChange}
+                        className='new-entry-input'
+                        name="password"
+                        placeholder='Password'
+                     >
+                     </input>
+                     <div className="text-danger">{this.state.errorsMessage.password}</div>
+                  </div>
+
+                  <div className="form-group">
+                     <label htmlFor="confirmPassword"><b>Confirm Password</b></label>
+                     <input type='password'
+                        value={this.state.confirmPassword}
+                        onChange={this.handleChange}
+                        className='new-entry-input'
+                        name="confirmPassword"
+                        placeholder='Confirm Password'
+                     >
+                     </input>
+                     <div className="text-danger">{this.state.errorsMessage.confirmPassword}</div>
+                  </div>
+
+                  <button type='submit' className='add-button'>Sign up</button>
+               </form>
+            </div>
+
          </div>
-
-         <div className="right-column">
-            <p>Sign up</p>
-
-            <form onSubmit={handleSubmitRegisterNewUser} className="signup-form">
-               <div className="form-group">
-                  <label htmlFor="name"><b>First Name</b></label>
-                  <input type='text'
-                     value={input.name}
-                     onChange={handleChange}
-                     className='new-entry-input'
-                     name="name"
-                     placeholder='First Name'
-                  >
-                  </input>
-                  <div className="text-danger">{errors.name}</div>
-               </div>
-
-               <div className="form-group">
-                  <label htmlFor="last_name"><b>last Name</b></label>
-                  <input type='text'
-                     value={input.last_name}
-                     onChange={handleChange}
-                     className='new-entry-input'
-                     name="last_name"
-                     placeholder='Last Name'
-                  >
-                  </input>
-                  <div className="text-danger">{errors.last_name}</div>
-               </div>
-
-               <div className="form-group">
-                  <label htmlFor="phone"><b>Phone</b></label>
-                  <input type='text'
-                     value={input.phone}
-                     onChange={handleChange}
-                     className='new-entry-input'
-                     name="phone"
-                     placeholder='Phone number (optional)'
-                  >
-                  </input>
-               </div>
-
-               <div className="form-group">
-                  <label htmlFor="email"><b>Email</b></label>
-                  <input type='email'
-                     value={input.email}
-                     onChange={handleChange}
-                     className='new-entry-input'
-                     name="email"
-                     placeholder='Email'
-                  >
-                  </input>
-                  <div className="text-danger">{errors.email}</div>
-               </div>
-
-               <div className="form-group">
-                  <label htmlFor="password"><b>Password</b></label>
-                  <input type='password'
-                     value={input.password}
-                     onChange={handleChange}
-                     className='new-entry-input'
-                     name="password"
-                     placeholder='Password'
-                  >
-                  </input>
-                  <div className="text-danger">{errors.password}</div>
-               </div>
-
-               <div className="form-group">
-                  <label htmlFor="confirm_password"><b>Confirm Password</b></label>
-                  <input type='password'
-                     value={input.confirm_password}
-                     onChange={handleChange}
-                     className='new-entry-input'
-                     name="confirm_password"
-                     placeholder='Confirm Password'
-                  >
-                  </input>
-                  <div className="text-danger">{errors.confirm_password}</div>
-               </div>
-
-               <button type='submit' className='add-button'>Sign up</button>
-            </form>
-         </div>
-
-      </div>
-   )
+      )
+   }
 }
