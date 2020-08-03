@@ -11,10 +11,56 @@ export default function Register(props) {
    const [userEmail, setUserEmail] = useState('')
    const [userPassword, setUserPassword] = useState("")
    const [userConfirmPassword, setUserConfirmPassword] = useState("")
-   const [messageUser, setMessageUser] = useState("")
+   const [input, setInput] = useState({
+      name: "",
+      last_name: "",
+      phone: "",
+      email: "",
+      password: "",
+      confirm_password: ""
+   })
+   const [errors, setErrors] = useState({})
+
+   const handleChange = (event) => {
+      let inputs = input;
+
+
+      [event.target.name] = event.target.value;
+      console.log('target name', [event.target.name])
+      console.log('target value', event.target.value)
+
+      inputs.first_name = event.target.value,
+
+         console.log("inputs", inputs)
+
+      setInput({
+         inputs
+      });
+   }
 
    const handleSubmitRegisterNewUser = () => {
       event.preventDefault();
+
+      console.log('validate', validate())
+
+      console.log(input, errors);
+
+      if (validate()) {
+         console.log(input, errors);
+
+         let inputs = {};
+         inputs["first_name"] = "";
+         inputs["last_name"] = "";
+         inputs["phone"] = "";
+         inputs["email"] = "";
+         inputs["password"] = "";
+         inputs["confirm_password"] = "";
+
+         setInput({
+            inputs
+         });
+
+      }
 
       // if (userGrade === "") {
       //    setMessageUser(
@@ -55,6 +101,65 @@ export default function Register(props) {
       // }
    }
 
+   const validate = () => {
+      let inputs = input;
+      let errors = {};
+      let isValid = true;
+
+      if (!inputs["first_name"]) {
+         isValid = false;
+         errors["first_name"] = "Please enter your first name.";
+      }
+
+      if (!inputs["last_name"]) {
+         isValid = false;
+         errors["last_name"] = "Please enter your last name.";
+      }
+
+      if (!inputs["phone"]) {
+         isValid = false;
+         errors["phone"] = "Please enter your phone.";
+      }
+
+      if (!inputs["email"]) {
+         isValid = false;
+         errors["email"] = "Please enter your email.";
+      }
+
+      if (typeof inputs["email"] !== "undefined") {
+         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+
+         if (!pattern.test(inputs["email"])) {
+            isValid = false;
+            errors["email"] = "Please enter valid email address.";
+         }
+      }
+
+      if (!inputs["password"]) {
+         isValid = false;
+         errors["password"] = "Please enter your password.";
+      }
+
+      if (!inputs["confirm_password"]) {
+         isValid = false;
+         errors["confirm_password"] = "Please enter your confirm password.";
+      }
+
+      if (typeof inputs["password"] !== "undefined" && typeof inputs["confirm_password"] !== "undefined") {
+
+         if (inputs["password"] != inputs["confirm_password"]) {
+            isValid = false;
+            errors["password"] = "Passwords don't match.";
+         }
+      }
+
+      setErrors({
+         errors
+      });
+
+      return isValid;
+   }
+
 
    return (
       <div className="signup-main-wrapper">
@@ -68,73 +173,81 @@ export default function Register(props) {
             <p>Sign up</p>
 
             <form onSubmit={handleSubmitRegisterNewUser} className="signup-form">
-               <label htmlFor="first-name"><b>First Name</b></label>
-               <input type='text'
-                  value={userFirstName}
-                  onChange={({ target }) => { setUserFirstName(target.value) }}
-                  className='new-entry-input'
-                  name="first-name"
-                  placeholder='First Name'
-                  required
-               >
-               </input>
+               <div className="form-group">
+                  <label htmlFor="name"><b>First Name</b></label>
+                  <input type='text'
+                     value={input.name}
+                     onChange={handleChange}
+                     className='new-entry-input'
+                     name="name"
+                     placeholder='First Name'
+                  >
+                  </input>
+                  <div className="text-danger">{errors.name}</div>
+               </div>
 
-               <label htmlFor="last-name"><b>last Name</b></label>
-               <input type='text'
-                  value={userLastName}
-                  onChange={({ target }) => { setUserLastName(target.value) }}
-                  className='new-entry-input'
-                  name="last-name"
-                  placeholder='Last Name'
-                  required
-               >
-               </input>
+               <div className="form-group">
+                  <label htmlFor="last_name"><b>last Name</b></label>
+                  <input type='text'
+                     value={input.last_name}
+                     onChange={handleChange}
+                     className='new-entry-input'
+                     name="last_name"
+                     placeholder='Last Name'
+                  >
+                  </input>
+                  <div className="text-danger">{errors.last_name}</div>
+               </div>
 
-               <label htmlFor="phone"><b>Phone</b></label>
-               <input type='text'
-                  value={userPhoneNumber}
-                  onChange={({ target }) => { setUserPhoneNumber(target.value) }}
-                  className='new-entry-input'
-                  name="phone"
-                  placeholder='Phone number (optional)'
-               >
-               </input>
+               <div className="form-group">
+                  <label htmlFor="phone"><b>Phone</b></label>
+                  <input type='text'
+                     value={input.phone}
+                     onChange={handleChange}
+                     className='new-entry-input'
+                     name="phone"
+                     placeholder='Phone number (optional)'
+                  >
+                  </input>
+               </div>
 
-               <label htmlFor="email"><b>Email</b></label>
-               <input type='email'
-                  value={userEmail}
-                  onChange={({ target }) => { setUserEmail(target.value) }}
-                  className='new-entry-input'
-                  name="email"
-                  placeholder='Email'
-                  required
-               >
-               </input>
+               <div className="form-group">
+                  <label htmlFor="email"><b>Email</b></label>
+                  <input type='email'
+                     value={input.email}
+                     onChange={handleChange}
+                     className='new-entry-input'
+                     name="email"
+                     placeholder='Email'
+                  >
+                  </input>
+                  <div className="text-danger">{errors.email}</div>
+               </div>
 
-               <label htmlFor="password"><b>Password</b></label>
-               <input type='password'
-                  value={userPassword}
-                  onChange={({ target }) => { setUserPassword(target.value) }}
-                  className='new-entry-input'
-                  name="password"
-                  placeholder='Password'
-                  required
-               >
-               </input>
+               <div className="form-group">
+                  <label htmlFor="password"><b>Password</b></label>
+                  <input type='password'
+                     value={input.password}
+                     onChange={handleChange}
+                     className='new-entry-input'
+                     name="password"
+                     placeholder='Password'
+                  >
+                  </input>
+                  <div className="text-danger">{errors.password}</div>
+               </div>
 
-               <label htmlFor="confirm-password"><b>Confirm Password</b></label>
-               <input type='password'
-                  value={userConfirmPassword}
-                  onChange={({ target }) => { setUserConfirmPassword(target.value) }}
-                  className='new-entry-input'
-                  name="confirm-password"
-                  placeholder='Confirm Password'
-                  required
-               >
-               </input>
-
-               <div className="message">
-                  <p>{messageUser}</p>
+               <div className="form-group">
+                  <label htmlFor="confirm_password"><b>Confirm Password</b></label>
+                  <input type='password'
+                     value={input.confirm_password}
+                     onChange={handleChange}
+                     className='new-entry-input'
+                     name="confirm_password"
+                     placeholder='Confirm Password'
+                  >
+                  </input>
+                  <div className="text-danger">{errors.confirm_password}</div>
                </div>
 
                <button type='submit' className='add-button'>Sign up</button>

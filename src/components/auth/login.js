@@ -28,12 +28,6 @@ export default class Login extends Component {
       return (
          <div className="login-main-wrapper">
             <div className="login-container">
-               <div className="logo">
-                  {/* <Link to="/">
-                     <img src={Logo} alt='Logo' />
-                  </Link> */}
-               </div>
-
                <div className="title">
                   <p>Log in to your account</p>
                </div>
