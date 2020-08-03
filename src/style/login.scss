@@ -32,26 +32,11 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      box-shadow: 0px 15px 55px rgba(0, 0, 0, 0.9);
-
-      .logo{
-         margin-top: 10px;
-
-         img{        
-            height: 120px;
-            width: 180px;
-         }
-      }     
+      box-shadow: 0px 15px 55px rgba(0, 0, 0, 0.9);        
       
       .title{
          color: #FFBE0B;
          font-size: 1.8em;
-      }
-      
-      .error-message{
-         position: absolute;
-         margin-top: 235px;
-         color: black;
       }
 
       .login-form{   
@@ -59,26 +44,28 @@
          padding: 30px 2px;   
    
          .form-group{
+            display: flex;
+            flex-direction: column;
+
             label{
                color: #FFBE0B;
                font-size: 0.8em;
                font-family: 'Open Sans', sans-serif;
-            }
-
-            .inputs{
-               display: flex;
-               justify-content: center;
-               align-items: center;
-               margin-bottom: 15px;
+            }            
    
-              input{
-                 width: 300px;
-                 height: 30px;
-                 padding: 6px 15px;
-                 font-size: 1em;
-                 border-radius: 5px;
-                 border: 1px solid transparent;              
-              }
+            .new-entry-input{
+               width: 300px;
+               height: 30px;
+               margin-bottom: 7px;
+               padding: 6px 15px;
+               font-size: 1em;
+               border-radius: 5px;
+               border: 1px solid transparent;              
+            }           
+
+            .error-message{       
+               font-size: 0.8em;
+               color: #d83113;
             }
         }
    
