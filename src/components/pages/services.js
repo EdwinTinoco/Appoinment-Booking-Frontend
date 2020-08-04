@@ -99,7 +99,7 @@ export default function Services() {
          </div>
 
          <div className="certificate-licences">
-            Aqui van las licencias, cerfificaciones, diplomas
+            Aqui van las licencias, cerfificaciones, diplomas, titulos, etc.
          </div>
 
          <div className="get-appointment">
