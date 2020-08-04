@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import axios from "axios";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
@@ -10,7 +11,8 @@ export default class Login extends Component {
          user: {},
          email: "",
          password: "",
-         errorsMessage: {}
+         errorsMessage: {},
+         errorBackendMessage: ""
       };
 
       this.handleChange = this.handleChange.bind(this);
@@ -27,11 +29,31 @@ export default class Login extends Component {
       event.preventDefault();
 
       if (this.validate()) {
-         console.log(this.state.errorsMessage);
+         axios.post('http://localhost:5000/api/user/login',
+            {
+               users_email: this.state.email,
+               users_password: this.state.password
+            }
+         ).then(response => {
+            console.log('response', response.data)
+            console.log('response', response.data["result"]["error"])
 
-         this.setState({
-            email: "",
-            password: ""
+            if (response.data["result"]["error"] === "yes") {
+               this.setState({
+                  errorBackendMessage: response.data["result"]["message"]
+               })
+            } else {
+               this.setState({
+                  email: "",
+                  password: "",
+                  errorsMessage: {},
+                  errorBackendMessage: ""
+               })
+
+               this.props.handleSuccessfulAuth();
+            }
+         }).catch(error => {
+            console.log('handleSubmit error', error)
          })
       }
    }
@@ -66,8 +88,8 @@ export default class Login extends Component {
                   <p>Log in to your account</p>
                </div>
 
-               <div className="error-message">
-                  {this.state.errorMessage}
+               <div className="error-validation-message">
+                  {this.state.errorValidationMessage}
                </div>
 
                <form onSubmit={this.handleSubmit} className="login-form">
@@ -86,7 +108,7 @@ export default class Login extends Component {
 
                   <div className="form-group">
                      <label htmlFor="password"><b>Password</b></label>
-                     <input type='text'
+                     <input type='password'
                         value={this.state.password}
                         onChange={this.handleChange}
                         className='new-entry-input'

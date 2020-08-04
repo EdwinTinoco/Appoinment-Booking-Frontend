@@ -12,6 +12,7 @@ import NavigationBar from "./navigation-bar/navigation-bar"
 import Home from "./pages/home"
 import Auth from "./pages/auth"
 import SignUp from "./auth/signup"
+import Schedule from "./pages/schedule"
 import Services from "./pages/services"
 import About from "./pages/about"
 import Contact from "./pages/contact"
@@ -38,6 +39,7 @@ export default function App(props) {
               )}
             />
             <Route path="/signup" component={SignUp} />
+            <Route path="/user/schedule" component={Schedule} />
 
             <Route path="/services" component={Services} />
             <Route path="/about" component={About} />

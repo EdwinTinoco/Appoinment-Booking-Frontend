@@ -10,7 +10,7 @@ export default class Auth extends Component {
    }
 
    handleSuccessfulAuth() {
-      this.props.history.push("/user/home");
+      this.props.history.push("/user/schedule");
    }
 
    render() {
