@@ -1,11 +1,10 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import Logo from "../../../static/assets/images/logo/logo-1.png"
 
 const NavigationBar = () => {
-
    return (
       <div className="navbar-main-wrapper">
          <div className="contact-info">

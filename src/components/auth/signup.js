@@ -1,7 +1,7 @@
 import React, { Component } from "react"
+import axios from "axios"
 
 import Image7 from '../../../static/assets/images/images/image-7.jpg'
-
 
 export default class Register extends Component {
    constructor(props) {
@@ -14,7 +14,8 @@ export default class Register extends Component {
          email: "",
          password: "",
          confirmPassword: "",
-         errorsMessage: {}
+         // errorsMessage: {},
+         backendErrorMessages: ""
       }
 
       this.handleChange = this.handleChange.bind(this)
@@ -30,72 +31,103 @@ export default class Register extends Component {
    handleSubmitRegisterNewUser() {
       event.preventDefault();
 
-      if (this.validate()) {
-         console.log(this.state.errorsMessage);
+      // if (this.validate()) {
+      // console.log(this.state.errorsMessage);
 
-         this.setState({
-            firstName: "",
-            lastName: "",
-            phone: "",
-            email: "",
-            password: "",
-            confirmPassword: "",
+      axios.post('http://localhost:5000/api/user/register',
+         {
+            users_first_name: this.state.firstName,
+            users_last_name: this.state.lastName,
+            users_phone: parseInt(this.state.phone),
+            users_email: this.state.email,
+            users_password: this.state.password,
+            users_confirm_password: this.state.confirmPassword
          })
-      }
+         .then(response => {
+            console.log('response register user', response.data);
+
+            if (response.data["error"] === "no") {
+               console.log('error no', response.data.error);
+
+               this.setState({
+                  firstName: "",
+                  lastName: "",
+                  phone: "",
+                  email: "",
+                  password: "",
+                  confirmPassword: "",
+                  backendErrorMessages: 'Your account was created succesfully!'
+               })
+            } else {
+               this.setState({
+                  backendErrorMessages: response.data['errorMessage']
+               })
+            }
+         })
+         .catch(error => {
+            console.log('handleSubmitRegisterNewUser error', error);
+
+         })
+      // }
    }
 
-   validate() {
-      let errors = {};
-      let isValid = true;
+   // validate() {
+   //    let errors = {};
+   //    let isValid = true;
 
-      if (!this.state.firstName) {
-         isValid = false;
-         errors["firstName"] = "Please enter your first name.";
-      }
+   //    if (!this.state.firstName) {
+   //       isValid = false;
+   //       errors["firstName"] = "Please enter your first name.";
+   //    }
 
-      if (!this.state.lastName) {
-         isValid = false;
-         errors["lastName"] = "Please enter your last name.";
-      }
+   //    if (!this.state.lastName) {
+   //       isValid = false;
+   //       errors["lastName"] = "Please enter your last name.";
+   //    }
 
-      if (!this.state.email) {
-         isValid = false;
-         errors["email"] = "Please enter your email.";
-      }
+   //    if (!this.state.phone) {
+   //       isValid = false;
+   //       errors["phone"] = "Please enter your phone.";
+   //    }
 
-      if (typeof this.state.email !== "undefined") {
-         var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
+   //    if (!this.state.email) {
+   //       isValid = false;
+   //       errors["email"] = "Please enter your email.";
+   //    }
 
-         if (!pattern.test(this.state.email)) {
-            isValid = false;
-            errors["email"] = "Please enter valid email address.";
-         }
-      }
+   //    if (typeof this.state.email !== "undefined") {
+   //       var pattern = new RegExp(/^(("[\w-\s]+")|([\w-]+(?:\.[\w-]+)*)|("[\w-\s]+")([\w-]+(?:\.[\w-]+)*))(@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$)|(@\[?((25[0-5]\.|2[0-4][0-9]\.|1[0-9]{2}\.|[0-9]{1,2}\.))((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\.){2}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[0-9]{1,2})\]?$)/i);
 
-      if (!this.state.password) {
-         isValid = false;
-         errors["password"] = "Please enter your password.";
-      }
+   //       if (!pattern.test(this.state.email)) {
+   //          isValid = false;
+   //          errors["email"] = "Please enter valid email address.";
+   //       }
+   //    }
 
-      if (!this.state.confirmPassword) {
-         isValid = false;
-         errors["confirmPassword"] = "Please enter your confirm password.";
-      }
+   //    if (!this.state.password) {
+   //       isValid = false;
+   //       errors["password"] = "Please enter your password.";
+   //    }
 
-      if (typeof this.state.password !== "undefined" && typeof this.state.confirmPassword !== "undefined") {
+   //    if (!this.state.confirmPassword) {
+   //       isValid = false;
+   //       errors["confirmPassword"] = "Please enter your confirm password.";
+   //    }
 
-         if (this.state.password != this.state.confirmPassword) {
-            isValid = false;
-            errors["password"] = "Passwords don't match.";
-         }
-      }
+   //    if (typeof this.state.password !== "undefined" && typeof this.state.confirmPassword !== "undefined") {
 
-      this.setState({
-         errorsMessage: errors
-      })
+   //       if (this.state.password != this.state.confirmPassword) {
+   //          isValid = false;
+   //          errors["password"] = "Passwords don't match.";
+   //       }
+   //    }
 
-      return isValid;
-   }
+   //    this.setState({
+   //       errorsMessage: errors
+   //    })
+
+   //    return isValid;
+   // }
 
 
 
@@ -111,6 +143,8 @@ export default class Register extends Component {
             <div className="right-column">
                <p>Sign up</p>
 
+               <p>{this.state.backendErrorMessages}</p>
+
                <form onSubmit={this.handleSubmitRegisterNewUser} className="signup-form">
                   <div className="form-group">
                      <label htmlFor="firstName"><b>*First Name</b></label>
@@ -122,7 +156,7 @@ export default class Register extends Component {
                         placeholder='First Name'
                      >
                      </input>
-                     <div className="error-message">{this.state.errorsMessage.firstName}</div>
+                     {/* <div className="error-message">{this.state.errorsMessage.firstName}</div> */}
                   </div>
 
                   <div className="form-group">
@@ -135,24 +169,25 @@ export default class Register extends Component {
                         placeholder='Last Name'
                      >
                      </input>
-                     <div className="error-message">{this.state.errorsMessage.lastName}</div>
+                     {/* <div className="error-message">{this.state.errorsMessage.lastName}</div> */}
                   </div>
 
                   <div className="form-group">
-                     <label htmlFor="phone"><b>Phone</b></label>
+                     <label htmlFor="phone"><b>*Phone</b></label>
                      <input type='text'
                         value={this.state.phone}
                         onChange={this.handleChange}
                         className='new-entry-input'
                         name="phone"
-                        placeholder='Phone number (optional)'
+                        placeholder='Phone number'
                      >
                      </input>
+                     {/* <div className="error-message">{this.state.errorsMessage.phone}</div> */}
                   </div>
 
                   <div className="form-group">
                      <label htmlFor="email"><b>*Email</b></label>
-                     <input type='email'
+                     <input type='text'
                         value={this.state.email}
                         onChange={this.handleChange}
                         className='new-entry-input'
@@ -160,7 +195,7 @@ export default class Register extends Component {
                         placeholder='Email'
                      >
                      </input>
-                     <div className="error-message">{this.state.errorsMessage.email}</div>
+                     {/* <div className="error-message">{this.state.errorsMessage.email}</div> */}
                   </div>
 
                   <div className="form-group">
@@ -173,7 +208,7 @@ export default class Register extends Component {
                         placeholder='Password'
                      >
                      </input>
-                     <div className="error-message">{this.state.errorsMessage.password}</div>
+                     {/* <div className="error-message">{this.state.errorsMessage.password}</div> */}
                   </div>
 
                   <div className="form-group">
@@ -186,7 +221,7 @@ export default class Register extends Component {
                         placeholder='Confirm Password'
                      >
                      </input>
-                     <div className="error-message">{this.state.errorsMessage.confirmPassword}</div>
+                     {/* <div className="error-message">{this.state.errorsMessage.confirmPassword}</div> */}
                   </div>
 
                   <button type='submit' className='add-button'>Sign up</button>

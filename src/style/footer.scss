@@ -118,11 +118,22 @@
       background-color: #272626;
       color: #FFBE0B;
       text-align: center;
-      padding: 1px 0px;
+      padding: 5px 0px;
 
-      p{
-         font-size: 0.8em;
-         font-family: 'Open Sans', sans-serif;
+      .info{
+         p{
+            margin: 10px 0px 0px 0px;
+            font-size: 0.8em;
+            font-family: 'Open Sans', sans-serif;
+         }
+      }
+
+      .powered-by{
+         p{
+            margin: 0px 0px 10px 0px;
+            font-size: 0.8em;
+            font-family: 'Open Sans', sans-serif;
+         }
       }
    }
 }

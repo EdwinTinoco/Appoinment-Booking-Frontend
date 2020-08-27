@@ -11,6 +11,7 @@ export default function Footer(props) {
             <div className="left-column">
                <div className="about">
                   <p className="title">About Us</p>
+
                   <p className="about-info">
                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed a felis
                      non sem elementum tempor in at urna. Suspendisse auctor libero ut nibh
@@ -40,6 +41,7 @@ export default function Footer(props) {
 
             <div className="right-column">
                <p>Social Media</p>
+
                <div className="social-media">
                   <a href="https://www.facebook.com/MHRenovationsUtah/" target="_blank">
                      <div className="facebook">
@@ -60,8 +62,9 @@ export default function Footer(props) {
 
          <div className="copyright-wrapper">
             <div className="info">
-               <p>&copy; 2020 DT Tramitaciones y Servicios Diaz L.L.C. &#124; All rights reserved</p>
+               <p>&copy; 2020 TD Tramitaciones y Servicios Diaz L.L.C. &#124; All rights reserved</p>
             </div>
+
             <div className="powered-by">
                <p>Powered by Webmoun Company</p>
             </div>
